@@ -1,5 +1,7 @@
 package app.service;
 
+import app.domain.Parrot;
+
 import java.sql.*;
 
 public class ParrotService {
@@ -32,6 +34,14 @@ public class ParrotService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+    }
+    public void addParrot(Parrot parrot) throws SQLException {
+
+        String insertIntoParrot = "INSERT INTO PARROT (latinName, givenName, age, countryOfOrigin) VALUES ('" +
+                parrot.getLatinName() + "','" + parrot.getGivenName() + "'," + parrot.getAge()
+                + ",'" + parrot.getCountryOfOrigin() + "'" +")";
+        statement.executeUpdate(insertIntoParrot);
     }
 
 }
