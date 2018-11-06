@@ -1,47 +1,70 @@
 package app.domain;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Parrot {
-    private String latinName;
-    private String givenName;
-    private int age;
-    private String countryOfOrigin;
+    private int id;
+    private String name;
+    private Date dateOfBirth;
+    private double weight;
+    private boolean isExotic;
 
-    public Parrot(String latinName, String givenName, int age, String countryOfOrigin) {
-        this.latinName = latinName;
-        this.givenName = givenName;
-        this.age = age;
-        this.countryOfOrigin = countryOfOrigin;
+    public Parrot(String name, Date dateOfBirth, double weight, boolean isExotic) {
+        this.name = name;
+        this.dateOfBirth = dateOfBirth;
+        this.weight = weight;
+        this.isExotic = isExotic;
     }
 
-    public String getLatinName() {
-        return latinName;
+    public int getId() {
+        return id;
     }
 
-    public void setLatinName(String latinName) {
-        this.latinName = latinName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getGivenName() {
-        return givenName;
+    public String getName() {
+        return name;
     }
 
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getAge() {
-        return age;
+    public Date getDateOfBirth() {
+
+        return dateOfBirth;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public String getCountryOfOrigin() {
-        return countryOfOrigin;
+    public double getWeight() {
+        return weight;
     }
 
-    public void setCountryOfOrigin(String countryOfOrigin) {
-        this.countryOfOrigin = countryOfOrigin;
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public boolean isExotic() {
+        return isExotic;
+    }
+
+    public void setExotic(boolean exotic) {
+        isExotic = exotic;
+    }
+
+    @Override
+    public String toString() {
+        return "Parrot{" +
+                "name='" + name + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", weight=" + weight +
+                ", isExotic=" + isExotic +
+                '}';
     }
 }
