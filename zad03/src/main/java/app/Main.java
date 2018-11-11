@@ -17,8 +17,14 @@ public class Main {
         parrotService.addParrot(new Parrot("Cuculus canorus",new GregorianCalendar(2011, 3, 14).getTime(),0.5,false));
         parrotService.addParrot(new Parrot("Columbidae",new GregorianCalendar(2013, 4, 10).getTime(),1.2,false));
         parrotService.deleteParrot("Nymphicus hollandicus");
-        List<Parrot> p = parrotService.getAllParrots();
-        p.forEach(System.out::println);
-        System.out.println(parrotService.getTheOldestParrot());
+        List<Parrot> parrots = parrotService.getAllParrots();
+        List<Parrot> exoticParrots = parrotService.getExoticParrots();
+        Parrot oldest = parrotService.getTheOldestParrot();
+        parrots.forEach(System.out::println);
+        exoticParrots.forEach(System.out::println);
+        System.out.println(oldest);
+
+        System.out.println();
+        parrotService.printAllParrots();
     }
 }
