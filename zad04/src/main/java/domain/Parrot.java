@@ -2,6 +2,8 @@ package domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -17,6 +19,15 @@ public class Parrot {
     private Country country;
     @OneToOne
     private ParrotStats stats;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "Parrot_Product",
+            joinColumns = { @JoinColumn(name = "parrot_id") },
+            inverseJoinColumns = { @JoinColumn(name = "hygiene_product_id") }
+    )
+    Set<HygieneProduct> products = new HashSet<>();
+
     public Parrot() {}
     public Parrot(String name, Date dateOfBirth, double weight, boolean isExotic) {
         this.name = name;
