@@ -17,7 +17,7 @@ public class Parrot {
     private Country country;
     @OneToOne
     private ParrotStats stats;
-
+    public Parrot() {}
     public Parrot(String name, Date dateOfBirth, double weight, boolean isExotic) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
