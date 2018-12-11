@@ -25,8 +25,7 @@ public class ParrotManagerImpl implements ParrotManager{
     @Override
     @SuppressWarnings("unchecked")
     public List<Parrot> getAllParrots() {
-        return sessionFactory.getCurrentSession().getNamedQuery("Parrot.all")
-                .list();
+        return sessionFactory.getCurrentSession().getNamedQuery("Parrot.all").list();
     }
 
     @Override
@@ -35,7 +34,29 @@ public class ParrotManagerImpl implements ParrotManager{
     }
 
     @Override
-    public void getParrot(int id) {
+    public Parrot getParrot(int id) {
+        return (Parrot) sessionFactory.getCurrentSession().get(Parrot.class,id);
+    }
 
+    @Override
+    public void removeParrot(int id) {
+        Parrot parrot =  getParrot(id);
+        sessionFactory.getCurrentSession().delete(parrot);
+    }
+
+    @Override
+    public Parrot getParrotByName(String parrotName) {
+        return (Parrot) sessionFactory.getCurrentSession().getNamedQuery("Parrot.byName").setString("name", parrotName).uniqueResult();
+    }
+
+    @Override
+    public void removeParrotByName(String parrotName) {
+        Parrot parrot = (Parrot) sessionFactory.getCurrentSession().getNamedQuery("Parrot.byName").setString("name", parrotName).uniqueResult();
+        sessionFactory.getCurrentSession().delete(parrot);
+    }
+
+    @Override
+    public List<Parrot> getAllExoticParrots() {
+        return sessionFactory.getCurrentSession().getNamedQuery("Parrot.exotic").list();
     }
 }

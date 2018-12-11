@@ -7,7 +7,10 @@ import java.util.Set;
 
 
 @NamedQueries({
-        @NamedQuery(name="Parrot.all", query="SELECT p FROM Parrot p")
+        @NamedQuery(name="Parrot.all", query="SELECT p FROM Parrot p"),
+        @NamedQuery(name="Parrot.exotic", query="SELECT p FROM Parrot p WHERE isExotic=true"),
+        @NamedQuery(name="Parrot.byName", query="SELECT p FROM Parrot p WHERE p.name = :name")
+
 })
 
 @Entity
@@ -19,9 +22,9 @@ public class Parrot {
     private Date dateOfBirth;
     private double weight;
     private boolean isExotic;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Country country;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private ParrotStats stats;
 
     @ManyToMany(cascade = { CascadeType.ALL })
