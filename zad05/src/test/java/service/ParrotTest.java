@@ -21,23 +21,18 @@ import java.util.List;
 public class ParrotTest {
     @Autowired
     ParrotManager parrotManager;
+
+    @Test
+    public void addParrotTest() {
+        generateData();
+
+    }
     @Test
     public void showAllParrotsTest() {
-
-        //Generating data
-        Country country = new Country("USA");
-        ParrotStats stats = new ParrotStats("Lexy",0,"brązowy");
-        Parrot parrot = new Parrot("Strigopidae",new Date(),0.1,false,country,stats);
-        parrotManager.addParrot(parrot);
-        country = new Country("Canada");
-        stats = new ParrotStats("Rob",2,"niebieski");
-        parrot = new Parrot("Nelepsittacus",new Date(),0.4,false,country,stats);
-        parrotManager.addParrot(parrot);
-        //
-        System.out.println("SHOW ALL TEST");
+        generateData();
         List<Parrot> allParrots = parrotManager.getAllParrots();
         System.out.println();
-
+        System.out.println("SHOW ALL TEST");
         if(!allParrots.isEmpty()) {
             for(Parrot p : allParrots) {
                 System.out.println(p.getName());
@@ -46,15 +41,22 @@ public class ParrotTest {
             System.out.println("Tablica papug pusta!");
         }
     }
-
     @Test
-    public void addParrotTest() {
-        Country country = new Country("Australia");
-        ParrotStats stats = new ParrotStats("Bury",3,"zielony");
-        Parrot parrot = new Parrot("Nimfa",new Date(),0.3,true,country,stats);
-        parrotManager.addParrot(parrot);
+    public void showAllExoticParrotsTest() {
+        generateData();
+        List<Parrot> allParrots = parrotManager.getAllExoticParrots();
+        System.out.println();
+        System.out.println("SHOW ALL EXOTIC PARROTS TEST");
 
+        if(!allParrots.isEmpty()) {
+            for(Parrot p : allParrots) {
+                System.out.println(p.getName());
+            }
+        } else {
+            System.out.println("Tablica papug egzotycznych pusta!");
+        }
     }
+
 
     @Test
     public void removeParrotTest() {
@@ -67,7 +69,23 @@ public class ParrotTest {
 
     @Test
     public void getParrotTest() {
+        generateData();
         System.out.println("GET TEST: " + parrotManager.getParrotByName("Nimfa"));
+    }
+
+    public void generateData() {
+        Country country = new Country("Australia");
+        ParrotStats stats = new ParrotStats("Bury",3,"zielony");
+        Parrot parrot = new Parrot("Nimfa",new Date(),0.3,true,country,stats);
+        parrotManager.addParrot(parrot);
+        country = new Country("USA");
+        stats = new ParrotStats("Lexy",0,"brązowy");
+        parrot = new Parrot("Strigopidae",new Date(),0.1,false,country,stats);
+        parrotManager.addParrot(parrot);
+        country = new Country("Canada");
+        stats = new ParrotStats("Rob",2,"niebieski");
+        parrot = new Parrot("Nelepsittacus",new Date(),0.4,true,country,stats);
+        parrotManager.addParrot(parrot);
     }
 
 }
