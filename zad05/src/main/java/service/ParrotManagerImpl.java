@@ -1,6 +1,7 @@
 package service;
 
 import domain.Parrot;
+import domain.ParrotStats;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,6 +27,9 @@ public class ParrotManagerImpl implements ParrotManager{
     @SuppressWarnings("unchecked")
     public List<Parrot> getAllParrots() {
         return sessionFactory.getCurrentSession().getNamedQuery("Parrot.all").list();
+    }
+    public ParrotStats getParrotStats(String parrotName) {
+        return (ParrotStats) sessionFactory.getCurrentSession().getNamedQuery("Parrot.stats").setString("name", parrotName).uniqueResult();
     }
 
     @Override

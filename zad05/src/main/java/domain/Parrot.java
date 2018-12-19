@@ -9,7 +9,7 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name="Parrot.all", query="SELECT p FROM Parrot p"),
         @NamedQuery(name="Parrot.exotic", query="SELECT p FROM Parrot p WHERE isExotic=true"),
-        @NamedQuery(name="Parrot.byName", query="SELECT p FROM Parrot p WHERE p.name = :name")
+        @NamedQuery(name="Parrot.byName", query="SELECT p FROM Parrot p WHERE p.name = :name"),
 
 })
 
@@ -22,18 +22,18 @@ public class Parrot {
     private Date dateOfBirth;
     private double weight;
     private boolean isExotic;
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private Country country;
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private ParrotStats stats;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @JoinTable(
             name = "Parrot_Product",
             joinColumns = { @JoinColumn(name = "parrot_id") },
             inverseJoinColumns = { @JoinColumn(name = "hygiene_product_id") }
     )
-    Set<HygieneProduct> products = new HashSet<>();
+    private Set<HygieneProduct> products = new HashSet<>();
 
     public Parrot() {}
     public Parrot(String name, Date dateOfBirth, double weight, boolean isExotic, Country country, ParrotStats stats) {
@@ -109,6 +109,13 @@ public class Parrot {
         this.stats = stats;
     }
 
+    public Set<HygieneProduct> getProducts() {
+        return products;
+    }
+
+    public void setProducts(HashSet<HygieneProduct> products) {
+        this.products = products;
+    }
 
     @Override
     public String toString() {

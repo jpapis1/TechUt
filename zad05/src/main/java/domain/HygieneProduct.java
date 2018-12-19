@@ -13,7 +13,9 @@ public class HygieneProduct {
     @ManyToMany(mappedBy = "products")
     private Set<Parrot> parrots = new HashSet<>();
     public HygieneProduct() {}
-
+    public HygieneProduct(String name) {
+        this.name = name;
+    }
     public long getId() {
         return id;
     }

@@ -17,6 +17,13 @@ public class Owner {
     private List<Parrot> parrots = new ArrayList<>();
 
     public Owner() {}
+
+    public Owner(String firstName, String lastName, List<Parrot> parrots) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.parrots = parrots;
+    }
+
     public long getId() {
         return id;
     }
