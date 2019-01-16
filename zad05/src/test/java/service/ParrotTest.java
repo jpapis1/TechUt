@@ -90,6 +90,19 @@ public class ParrotTest {
         System.out.println("GET TEST: " + parrotManager.getParrotByName("Nimfa"));
     }
     @Test
+    public void statsTest() {
+        generateData();
+        Parrot p = parrotManager.getParrotByName("Strigopidae");
+        assertEquals("brązowy",p.getStats().getColor());
+        assertEquals("Lexy",p.getStats().getNickName());
+    }
+    @Test
+    public void countryTest() {
+        generateData();
+        Parrot p = parrotManager.getParrotByName("Nimfa");
+        assertEquals("Australia",p.getCountry().getName());
+    }
+    @Test
     public void getParrotProductsTest() {
         generateData();
         Set<HygieneProduct> hp = parrotManager.getAllParrotHygieneProducts("Nimfa");
