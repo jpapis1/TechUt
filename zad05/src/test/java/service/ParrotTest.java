@@ -89,18 +89,29 @@ public class ParrotTest {
         generateData();
         System.out.println("GET TEST: " + parrotManager.getParrotByName("Nimfa"));
     }
+    @Test
+    public void getParrotProductsTest() {
+        generateData();
+        Set<HygieneProduct> hp = parrotManager.getAllParrotHygieneProducts("Nimfa");
+        for(HygieneProduct product : hp) {
+            System.out.println(product.getName());
+        }
+        //hp.stream().forEach(x -> System.out.println(x));
+        //System.out.println("GET TEST: " + parrotManager.getParrotByName("Nimfa"));
+    }
     public void generateData() {
         Country country = new Country("Australia");
         ParrotStats stats = new ParrotStats("Bury",3,"zielony");
         HygieneProduct fProduct = new HygieneProduct("FeatherProduct");
         HygieneProduct sProduct = new HygieneProduct("SkinProduct");
         HygieneProduct vProduct = new HygieneProduct("VitalityProduct");
-        HashSet<HygieneProduct> productSet = new HashSet<>();
+        Set<HygieneProduct> productSet = new HashSet<>();
         productSet.add(fProduct);
         productSet.add(sProduct);
-        HashSet<HygieneProduct> productSet2 = new HashSet<>();
+        Set<HygieneProduct> productSet2 = new HashSet<>();
         productSet2.add(vProduct);
         productSet2.add(fProduct);
+
 
 
 

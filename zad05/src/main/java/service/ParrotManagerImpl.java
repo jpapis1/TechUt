@@ -1,5 +1,7 @@
 package service;
 
+import domain.HygieneProduct;
+import domain.Owner;
 import domain.Parrot;
 import domain.ParrotStats;
 import org.hibernate.SessionFactory;
@@ -7,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 @Transactional
@@ -62,5 +66,11 @@ public class ParrotManagerImpl implements ParrotManager{
     @Override
     public List<Parrot> getAllExoticParrots() {
         return sessionFactory.getCurrentSession().getNamedQuery("Parrot.exotic").list();
+    }
+
+    @Override
+    public Set<HygieneProduct> getAllParrotHygieneProducts(String parrotName) {
+        Parrot p = (Parrot) sessionFactory.getCurrentSession().getNamedQuery("Parrot.byName").setString("name", parrotName).uniqueResult();
+        return p.products;
     }
 }

@@ -3,6 +3,7 @@ package domain;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -10,8 +11,9 @@ import java.util.Set;
         @NamedQuery(name="Parrot.all", query="SELECT p FROM Parrot p"),
         @NamedQuery(name="Parrot.exotic", query="SELECT p FROM Parrot p WHERE isExotic=true"),
         @NamedQuery(name="Parrot.byName", query="SELECT p FROM Parrot p WHERE p.name = :name"),
-
+        @NamedQuery(name="Parrot.getOwners", query="SELECT o FROM Owner o WHERE o.firstName = :firstName AND o.lastName = :lastName")
 })
+
 
 @Entity
 public class Parrot {
@@ -27,13 +29,18 @@ public class Parrot {
     @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private ParrotStats stats;
 
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable(name="HYGIENEPRODUCT_PARROT", joinColumns=@JoinColumn(name="Parrots_id"), inverseJoinColumns=@JoinColumn(name="products_id"))
+    public Set<HygieneProduct> products;
+
+    /*
     @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @JoinTable(
             name = "Parrot_Product",
             joinColumns = { @JoinColumn(name = "parrot_id") },
             inverseJoinColumns = { @JoinColumn(name = "hygiene_product_id") }
     )
-    private Set<HygieneProduct> products = new HashSet<>();
+    private Set<HygieneProduct> products = new HashSet<>();*/
 
     public Parrot() {}
     public Parrot(String name, Date dateOfBirth, double weight, boolean isExotic, Country country, ParrotStats stats) {
@@ -113,7 +120,7 @@ public class Parrot {
         return products;
     }
 
-    public void setProducts(HashSet<HygieneProduct> products) {
+    public void setProducts(Set<HygieneProduct> products) {
         this.products = products;
     }
 

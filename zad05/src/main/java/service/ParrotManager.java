@@ -1,9 +1,11 @@
 package service;
 
+import domain.HygieneProduct;
 import domain.Parrot;
 import domain.ParrotStats;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ParrotManager {
     List<Parrot> getAllParrots();
@@ -14,4 +16,5 @@ public interface ParrotManager {
     void removeParrotByName(String parrotName);
     List<Parrot> getAllExoticParrots();
     ParrotStats getParrotStats(String parrotName);
+    Set<HygieneProduct> getAllParrotHygieneProducts(String parrotName);
 }

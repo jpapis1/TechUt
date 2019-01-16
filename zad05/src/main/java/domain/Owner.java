@@ -16,8 +16,13 @@ public class Owner {
     @OneToMany
     private List<Parrot> parrots = new ArrayList<>();
 
+
     public Owner() {}
 
+    public Owner(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
     public Owner(String firstName, String lastName, List<Parrot> parrots) {
         this.firstName = firstName;
         this.lastName = lastName;
