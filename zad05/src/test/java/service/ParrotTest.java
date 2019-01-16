@@ -128,6 +128,7 @@ public class ParrotTest {
 
 
 
+
         Parrot parrot = new Parrot("Nimfa",new Date(),0.3,true,country,stats);
         parrot.setProducts(productSet);
         parrotManager.addParrot(parrot);

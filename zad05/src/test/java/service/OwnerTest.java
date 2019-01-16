@@ -14,7 +14,7 @@ import java.util.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/beans.xml" })
-@TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
+@TransactionConfiguration(transactionManager = "txManager", defaultRollback = false)
 @Transactional
 public class OwnerTest {
     @Autowired
@@ -25,6 +25,8 @@ public class OwnerTest {
     public void getOwnersParrot() {
         generateData();
         List<Parrot> list = ownerManager.getOwnersParrots("Jan", "Kowalski");
+        System.out.println(list.get(0));
+        System.out.println(list.get(1));
         Assert.assertEquals(list.size(),2);
         //System.out.println("GET TEST: " + parrotManager.getParrotByName("Nimfa") + list.size());
     }
@@ -46,9 +48,10 @@ public class OwnerTest {
         Parrot parrot = new Parrot("Nimfa",new Date(),0.3,true,country,stats);
         parrot.setProducts(productSet);
         Parrot parrot2 = new Parrot("Raba",new Date(),1.3,false,country,stats);
+        parrotManager.addParrot(parrot2);
         parrot.setProducts(productSet);
         listOfParrots.add(parrot);
-        listOfParrots.add(parrot);
+        listOfParrots.add(parrot2);
         Owner owner = new Owner("Jan","Kowalski");
         owner.setParrots(listOfParrots);
         ownerManager.addOwner(owner);
